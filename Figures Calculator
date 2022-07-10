@@ -1,0 +1,372 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Kursova
+{
+    class Program
+    {
+        public static double Type()
+        {
+            string t;
+            double b;
+            while (true)
+            {                
+                t = Console.ReadLine();
+                if (double.TryParse(t, out b))
+                {
+                    break;
+                }
+            }
+            return b;
+        }
+        static void Main(string[] args)
+        {            
+                double a, b, c, h, d, l, r, s1, s2, s3, S, V, be;
+                string g, ba, pr;
+                Console.WriteLine("Welcome to the ultimate figures calculator!");
+            while (true)
+            {
+                Console.WriteLine("Which type of figure you want to calculate?");
+                Console.WriteLine("Please type triangle, rectangle, circle, square, sphere, piramid, parallelepiped, prism, cylinder!");
+                g = Console.ReadLine().ToLower();
+                while (!(g == "triangle" || g == "rectangle" || g == "circle" || g == "square" || g == "sphere" || g == "piramid" || g == "parallelepiped" || g=="prism" || g=="cylinder"))
+                {
+                    Console.WriteLine("Please type the figure correctly!");
+                    Console.WriteLine("Please type triangle, rectangle, circle, square, sphere, piramid, rectangular parallelepiped, prism or cylinder!");
+                    g = Console.ReadLine().ToLower();
+                }
+                //Ploski figuri:
+                if (g == "triangle")
+                {
+                    Console.WriteLine("      *      ");
+                    Console.WriteLine("     * *     ");
+                    Console.WriteLine("    *   *    ");
+                    Console.WriteLine("   *     *   ");
+                    Console.WriteLine("  *       *  ");
+                    Console.WriteLine(" * * * * * * ");
+                    Figures.Triangle();
+                }
+                if (g == "square")
+                {
+                    Console.WriteLine(" * * * * * * ");
+                    Console.WriteLine(" *         * ");
+                    Console.WriteLine(" *         * ");
+                    Console.WriteLine(" *         * ");
+                    Console.WriteLine(" *         * ");
+                    Console.WriteLine(" * * * * * * ");
+                    Figures.Square();
+                }
+                if (g == "rectangle")
+                {
+                    Console.WriteLine(" * * * * * * * * * ");
+                    Console.WriteLine(" *               * ");
+                    Console.WriteLine(" *               * ");
+                    Console.WriteLine(" *               * ");
+                    Console.WriteLine(" *               * ");
+                    Console.WriteLine(" * * * * * * * * * ");
+                    Figures.Rectangle();
+                }
+                if (g == "circle")
+                {
+                    Console.WriteLine("     *     ");
+                    Console.WriteLine("  *     *  ");
+                    Console.WriteLine(" *       * ");
+                    Console.WriteLine(" *       * ");
+                    Console.WriteLine("  *     *  ");
+                    Console.WriteLine("     *     ");
+                    Figures.Circle();
+                }
+                //Obemni figuri:                
+                if (g == "piramid")
+                {
+                    Console.WriteLine("Enter the type of the base of the piramid!");
+                    Console.WriteLine("Please type rectangle, triangle, square or circle!");
+                    ba = Console.ReadLine().ToLower();
+                    while (!(ba == "rectangle" || ba == "square" || ba == "circle" || ba == "triangle"))
+                    {
+                        Console.WriteLine("Please type rectangle, triangle, square or circle!");
+                        ba = Console.ReadLine().ToLower();
+                    }
+                    Console.WriteLine("Please type the hight of the piramid!");
+                    h = Type();
+                    while (h <= 0)
+                    {
+                        Console.WriteLine("Please type the hight of the piramid!");
+                        h = Type();
+                    }
+                    Console.WriteLine("");
+                    if (ba == "triangle")
+                    {
+                        Console.WriteLine("For calculating the full parameter of the piramid");
+                        Console.WriteLine(" we need to calculate the side triangles!");
+                        Console.WriteLine("");
+                        Console.WriteLine("You can use the hight of the sides of the piramid if you have it.");
+                        Console.WriteLine("");
+                        Console.WriteLine("The side triangles.");
+                        Console.WriteLine("s1: ");
+                        s1 = Figures.Triangle();
+                        Console.WriteLine("s2: ");
+                        s2 = Figures.Triangle();
+                        Console.WriteLine("s3: ");
+                        s3 = Figures.Triangle();
+                        Console.WriteLine("");
+                        Console.WriteLine("And now we will calculate the base area.");
+                        Console.WriteLine("");
+                        be = Figures.Triangle();
+                        S = s1 + s2 + s3 + be;
+                        V = (be * h) / 3;
+                        Console.WriteLine("The volume of the piramid is " + V);
+                        Console.WriteLine("The full parameter of the piramid is " + S);
+                        Console.WriteLine();
+                    }
+                    if (ba == "square")
+                    {
+                        Console.WriteLine("For calculating the surface area of the piramid we need to calculate the side triangles!");
+                        Console.WriteLine(" we need to calculate the side triangles!");
+                        Console.WriteLine("");
+                        Console.WriteLine("You can use the hight of the sides of the piramid if you have it.");
+                        Console.WriteLine("");
+                        Console.WriteLine("The side triangles.");
+                        Console.WriteLine("s1: ");
+                        s1 = Figures.Triangle();
+                        Console.WriteLine("");
+                        Console.WriteLine("Now we will calculate the base area.");
+                        be = Figures.Square();
+                        S = (4*s1) + be;
+                        V = (be * h) / 3;
+                        Console.WriteLine("");
+                        Console.WriteLine("The volume of the piramid is " + V);
+                        Console.WriteLine("The full surface area of the piramid is " + S);
+                    }
+                    if (ba == "rectangle")
+                    {
+                        Console.WriteLine("For calculating the surface area of the piramid" +
+                            "we need to calculate the side triangles!");
+                        Console.WriteLine("");
+                        Console.WriteLine("You can use the hight of the sides of the piramid if you have it.");
+                        Console.WriteLine("");
+                        Console.WriteLine("The first two triangles.");
+                        Console.WriteLine("s1: ");
+                        s1 = Figures.Triangle();
+                        Console.WriteLine("The second two triangles.");
+                        Console.WriteLine("s2: ");
+                        s2 = Figures.Triangle();
+                        Console.WriteLine("Now we will calculate the base area.");
+                        Console.WriteLine("");
+                        be = Figures.Rectangle();
+                        S = s1 + be;
+                        V = (be * h) / 3;
+                        Console.WriteLine("");
+                        Console.WriteLine("The volume of the piramid is " + V);
+                    }
+                    if (ba == "circle")
+                    {
+                        Console.WriteLine("This figure is actually cone!");
+                        Console.WriteLine("Please type the hight of the side of the cone!");
+                        Console.Write("l= ");
+                        l = Type();
+                        while (l <= 0 )
+                        {
+                            Console.WriteLine("Side must be positive lenght!");
+                            Console.Write("l= ");
+                            l = Type();
+                        }
+                        while ( l <= h )
+                        {
+                            Console.WriteLine("The hight of the cone must be larger than the side hight!");
+                            Console.Write("l= ");
+                            l = Type();
+                            while (l <= 0)
+                            {
+                                Console.WriteLine("Side must be positive lenght!");
+                                Console.Write("l= ");
+                                l = Type();
+                            }
+                        }
+                        Console.WriteLine("Please type the radius of the base circle!");
+                        Console.Write("r= ");
+                        r = Type();
+                        while (r < 0)
+                        {
+                            Console.WriteLine("Sides must be positive lenghts!");
+                            Console.Write("r= ");
+                            r = Type();
+                        }
+                        s1 = Math.PI * (r * l);
+                        Console.WriteLine("");
+                        Console.WriteLine("Now we need to calculate the base area.");
+                        Console.WriteLine("");
+                        be = Figures.Circle();
+                        S = s1 + be;
+                        V = (be * h) / 3;
+                        Console.WriteLine("");
+                        Console.WriteLine("The volume of the cone is " + V);
+                        Console.WriteLine("");
+                        Console.WriteLine("The full surface area of the cone is " + S);
+                    }
+                }
+                if (g == "prism")
+                {
+                    Console.WriteLine("Please type the hight of the prism!");
+                    h = Type();
+                    while (h <= 0)
+                    {
+                        Console.WriteLine("The hight must be positive number!");
+                        h = Type();
+                    }
+                    Console.WriteLine("For calculating the full parameter of the prism");
+                    Console.WriteLine(" we need to calculate the sides!");
+                    Console.WriteLine("First side of the prism!");
+                    Console.WriteLine("s1:");
+                    s1 = Figures.Rectangle();
+                    Console.WriteLine("Second side of the prism!");
+                    Console.WriteLine("s2:");
+                    s2 = Figures.Rectangle();
+                    Console.WriteLine("Third side of the prism!");
+                    Console.WriteLine("s3:");
+                    s3 = Figures.Rectangle();
+                    Console.WriteLine("");
+                    Console.WriteLine("|||Now we will calculate the base area.|||");
+                    Console.WriteLine("");
+                    be = Figures.Triangle();
+                    S = (s1 + s2 + s3) + (2 * be);
+                    V = be * h;
+                    Console.WriteLine("");
+                    Console.WriteLine("The volume of the piramid is " + V);
+                    Console.WriteLine("The full parameter of the piramid is " + S);
+                }
+                if (g == "cylinder")
+                {
+                    Console.WriteLine("Please type the hight of the cylinder!");
+                    Console.Write("h= ");
+                    h = Type();
+                    while (h <= 0)
+                    {
+                        Console.WriteLine("Sides must be positive lenghts!");
+                        Console.Write("h= ");
+                        h = Type();
+                    }
+                    Console.WriteLine("Please type the radius of the base circle!");
+                    Console.Write("r= ");
+                    r = Type();
+                    while (r < 0)
+                    {
+                        Console.WriteLine("Sides must be positive lenghts!");
+                        Console.Write("r= ");
+                        r = Type();
+                    }
+                    s1 = (2 * Math.PI * r) * h;
+                    Console.WriteLine("");
+                    Console.WriteLine("Now we need to calculate the base area.");
+                    Console.WriteLine("");
+                    be = Figures.Circle();
+                    S = s1 + be;
+                    V = be * h;
+                    Console.WriteLine("");
+                    Console.WriteLine("The volume of the cylinder is " + V);
+                    Console.WriteLine("The full surface area of the cylinder is " + S);
+                }
+                if (g == "parallelepiped")
+                {
+                    Console.WriteLine("Type the side of the paralelepiped!");
+                    Console.Write("a= ");
+                    a = Type();
+                    while (a < 0)
+                    {
+                        Console.WriteLine("Sides must be positive lenghts!");
+                        Console.Write("a= ");
+                        a = Type();
+                    }
+                    Console.WriteLine("Type the side of the paralelepiped!");
+                    Console.Write("b= ");
+                    b = Type();
+                    while (b < 0)
+                    {
+                        Console.WriteLine("Sides must be positive lenghts!");
+                        Console.Write("b= ");
+                        b = Type();
+                    }
+                    Console.WriteLine("Type the side of the paralelepiped!");
+                    Console.Write("c= ");
+                    c = Type();
+                    while (c < 0)
+                    {
+                        Console.WriteLine("Sides must be positive lenghts!");
+                        Console.Write("c= ");
+                        c = Type();
+                    }
+                    V = a * b * c;
+                    S = 2 * ((a * b) + (a * c) + (b * c));
+                    d = Math.Sqrt((a * a) + (b * b) + (c * c));
+                    if (a == b && b == c)
+                    {
+                        Console.WriteLine("That is actually a cube!");
+                        Console.WriteLine("");
+                        Console.WriteLine("The volume of the cube is " + V);
+                        Console.WriteLine("");
+                        Console.WriteLine("The surface area of the cube is " + S);
+                        Console.WriteLine("");
+                        Console.WriteLine("The diagonal is " + d);
+                    }
+                    else
+                    {
+                        Console.WriteLine("The volume of the paralelepiped is " + V);
+                        Console.WriteLine("");
+                        Console.WriteLine("The surface area of the paralelepiped is " + S);
+                        Console.WriteLine("");
+                        Console.WriteLine("The diagonal is " + d);
+                    }
+                }
+                if (g == "sphere")
+                {
+                    Console.WriteLine("Please write the radius of the sphere if you don't have it type 0!");
+                    Console.Write("r= ");
+                    r = Type();
+                    while (r<0)
+                    {
+                        Console.WriteLine("The radius must be positive lenght!");
+                        Console.Write("r= ");
+                        r = Type();
+                    }
+                    if (r==0)
+                    {
+                        Console.WriteLine("Please type the diameter of the sphere!");
+                        d = Type();
+                        while (d < 0)
+                        {
+                            Console.WriteLine("The diameter must be positive lenght!");
+                            Console.Write("d= ");
+                            d = Type();
+                        }
+                        r = d / 2;
+                    }
+                    S = (4 * Math.PI) * (r * r);
+                    V = ((4 * Math.PI) * (r * r * r)) / 3;                    
+                    Console.WriteLine("");
+                    Console.WriteLine("The surface area of the sphere is " + S);
+                    Console.WriteLine("The volume of the sphere is " + V);
+                }
+                Console.WriteLine("");
+                Console.WriteLine("Do you want to calculate another figure?");
+                Console.WriteLine("Please type yes or no!");
+                pr = Console.ReadLine().ToLower();
+                while (!(pr == "yes" || pr == "no"))
+                {
+                    Console.WriteLine("Please type yes or no!");
+                    pr = Console.ReadLine().ToLower();
+                }
+                if (pr == "yes")
+                {
+                    Console.Clear();
+                }
+                if (pr == "no")
+                {
+                    break;
+                }
+            }            
+        }
+    }
+}
